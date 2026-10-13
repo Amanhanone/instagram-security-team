@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import {
   Menu,
-  Phone,
-  Mail,
   User,
   Home,
   Dices,
@@ -10,6 +8,7 @@ import {
   Trophy,
   History,
   Megaphone,
+  Send,
 } from "lucide-react";
 
 export default function Dashboard() {
@@ -37,47 +36,17 @@ export default function Dashboard() {
           </div>
 
           <div className="flex items-center gap-2.5">
-            <div className="flex items-center gap-2.5">
-              {/* Phone Call Button */}
-              <a
-                href="tel:+251921337037"
-                aria-label="Support phone"
-                className="p-1 text-gray-400 transition hover:text-white"
-              >
-                <Phone size={18} />
-              </a>
-
-              {/* Telegram Support Button (@agent4bet) */}
-              <a
-                href="https://t.me/agent4bet"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Telegram support agent4bet"
-                className="p-1 text-gray-400 transition hover:text-white"
-              >
-                <Mail size={18} />
-              </a>
-
-              {/* Quick Deposit Button Icon */}
-              <Link
-                to="/deposit"
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#00c853]/40 bg-[#00c853]/20 text-[#00c853] transition hover:bg-[#00c853]/30"
-                title="Quick Deposit"
-              >
-                <Wallet size={16} />
-              </Link>
-
-
-
-              {/* User Profile / Account Link */}
-
-            </div>
-
-
+            {/* Quick Deposit Button Icon */}
+            <Link
+              to="/deposit"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#00c853]/40 bg-[#00c853]/20 text-[#00c853] transition hover:bg-[#00c853]/30"
+              title="Quick Deposit"
+            >
+              <Wallet size={16} />
+            </Link>
 
             {/* Account Balance Widget */}
-            <Link
-              to="/deposit">
+            <Link to="/deposit">
               <div className="flex items-center rounded-lg bg-[#1e2535] px-3 py-1.5 border border-white/5 text-xs font-bold text-white">
                 ETB
               </div>
@@ -114,15 +83,40 @@ export default function Dashboard() {
             <div className="flex flex-col items-center justify-center rounded-xl bg-[#161b26] p-3 border border-white/5 hover:border-white/10 transition cursor-pointer">
               <div className="text-2xl mb-1">💃</div>
               <Link to="/deposit">
-                <span className="text-[11px] font-bold text-gray-300 tracking-wider">LIVE CASINO</span></Link>
+                <span className="text-[11px] font-bold text-gray-300 tracking-wider">LIVE CASINO</span>
+              </Link>
             </div>
 
             <div className="flex flex-col items-center justify-center rounded-xl bg-[#161b26] p-3 border border-white/5 hover:border-white/10 transition cursor-pointer">
               <div className="text-2xl mb-1">⚽</div>
               <Link to="/deposit">
-                <span className="text-[11px] font-bold text-gray-300 tracking-wider">SPORTS</span></Link>
+                <span className="text-[11px] font-bold text-gray-300 tracking-wider">SPORTS</span>
+              </Link>
             </div>
           </div>
+
+          {/* Agent ለመሆን Banner Card (Amharic Agent Banner) */}
+          <a
+            href="https://t.me/agent4bet"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between rounded-2xl bg-gradient-to-r from-blue-900/40 via-[#161b26] to-cyan-900/40 p-4 border border-blue-500/30 hover:border-blue-400 transition shadow-lg group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/20 text-cyan-400 border border-blue-400/30">
+                <Send size={22} />
+              </div>
+              <div>
+                <h3 className="text-sm font-black text-white group-hover:text-cyan-400 transition">
+                 አጀንት ለመሆን
+                </h3>
+                <p className="text-xs text-gray-400 mt-0.5">
+                  ያግኙን @agent4bet በቴሌግራም
+                </p>
+              </div>
+            </div>
+            
+          </a>
 
           {/* Featured Telegram Banner */}
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#141238] via-[#24113e] to-[#0d2a33] p-5 border border-purple-500/20 shadow-xl flex items-center justify-between min-h-[160px]">
@@ -188,22 +182,18 @@ export default function Dashboard() {
           <Home size={18} />
           <span className="text-[10px] font-medium">Home</span>
         </Link>
-        <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
+        <Link to="/deposit" className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
           <Dices size={18} />
-          <Link to="/deposit">
-            <span className="text-[10px] font-medium">Sports</span>
-          </Link>
-        </button>
+          <span className="text-[10px] font-medium">Sports</span>
+        </Link>
         <Link to="/deposit" className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
           <Wallet size={18} />
           <span className="text-[10px] font-medium">Deposit</span>
         </Link>
-        <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
+        <Link to="/deposit" className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
           <Trophy size={18} />
-          <Link to="/deposit">
-            <span className="text-[10px] font-medium">Casino</span>
-          </Link>
-        </button>
+          <span className="text-[10px] font-medium">Casino</span>
+        </Link>
         <Link to="/deposit" className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
           <History size={18} />
           <span className="text-[10px] font-medium">History</span>
