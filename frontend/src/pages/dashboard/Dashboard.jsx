@@ -67,13 +67,13 @@ export default function Dashboard() {
                 <Wallet size={16} />
               </Link>
 
-             
+
 
               {/* User Profile / Account Link */}
-            
+
             </div>
 
-         
+
 
             {/* Account Balance Widget */}
             <Link
@@ -107,20 +107,20 @@ export default function Dashboard() {
             <div className="flex flex-col items-center justify-center rounded-xl bg-[#161b26] p-3 border border-white/5 hover:border-white/10 transition cursor-pointer">
               <div className="text-2xl mb-1">🎰</div>
               <Link to="/deposit">
-              <span className="text-[11px] font-bold text-gray-300 tracking-wider">CASINO</span>
+                <span className="text-[11px] font-bold text-gray-300 tracking-wider">CASINO</span>
               </Link>
             </div>
 
             <div className="flex flex-col items-center justify-center rounded-xl bg-[#161b26] p-3 border border-white/5 hover:border-white/10 transition cursor-pointer">
               <div className="text-2xl mb-1">💃</div>
               <Link to="/deposit">
-              <span className="text-[11px] font-bold text-gray-300 tracking-wider">LIVE CASINO</span></Link>
+                <span className="text-[11px] font-bold text-gray-300 tracking-wider">LIVE CASINO</span></Link>
             </div>
 
             <div className="flex flex-col items-center justify-center rounded-xl bg-[#161b26] p-3 border border-white/5 hover:border-white/10 transition cursor-pointer">
               <div className="text-2xl mb-1">⚽</div>
               <Link to="/deposit">
-              <span className="text-[11px] font-bold text-gray-300 tracking-wider">SPORTS</span></Link>
+                <span className="text-[11px] font-bold text-gray-300 tracking-wider">SPORTS</span></Link>
             </div>
           </div>
 
@@ -131,12 +131,17 @@ export default function Dashboard() {
               <h2 className="text-lg font-black leading-tight text-white tracking-tight">
                 ONE TAP.<br />INSTANT ACCESS.
               </h2>
-              <button className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-xs font-bold text-white shadow-lg shadow-blue-500/30 hover:opacity-90 transition">
+              <a
+                href="https://t.me/agent4bet"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-2 text-xs font-bold text-white shadow-lg shadow-blue-500/30 hover:opacity-90 transition"
+              >
                 <span>ይኑሩ!</span>
-                <Link to="/deposit">
-                <span className="text-[10px] opacity-80 uppercase">TAP TO JOIN</span>
-                </Link>
-              </button>
+                <span className="text-[10px] opacity-80 uppercase">
+                  TAP TO JOIN (@agent4bet)
+                </span>
+              </a>
             </div>
 
             <div className="shrink-0 text-5xl opacity-90 pr-2">
@@ -186,7 +191,7 @@ export default function Dashboard() {
         <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
           <Dices size={18} />
           <Link to="/deposit">
-          <span className="text-[10px] font-medium">Sports</span>
+            <span className="text-[10px] font-medium">Sports</span>
           </Link>
         </button>
         <Link to="/deposit" className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
@@ -196,7 +201,7 @@ export default function Dashboard() {
         <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
           <Trophy size={18} />
           <Link to="/deposit">
-          <span className="text-[10px] font-medium">Casino</span>
+            <span className="text-[10px] font-medium">Casino</span>
           </Link>
         </button>
         <Link to="/deposit" className="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
