@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Camera } from "lucide-react";
+import { authService } from "../../services/authService";
 
-export default function IgLoginClone() {
+export default function Login() {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    identifier: "",
+    phone: "",
     password: "",
   });
 
@@ -26,19 +27,26 @@ export default function IgLoginClone() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    if (!form.identifier || !form.password) {
-      setError("Please fill in all required fields.");
+    const phone = form.phone.trim();
+    const password = form.password;
+
+    if (!phone) {
+      setError("Please enter your mobile number.");
+      return;
+    }
+
+    if (!password || password.length < 8) {
+      setError("Your password must contain at least 8 characters.");
       return;
     }
 
     setLoading(true);
 
     try {
-      // Simulate educational auth delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await authService.login({ phone, password });
       navigate("/dashboard", { replace: true });
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      setError(err.message || "Unable to continue. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -79,13 +87,14 @@ export default function IgLoginClone() {
         <form onSubmit={handleSubmit} className="w-full space-y-3">
           <div className="mt-4"> 
             <input
-              id="identifier"
-              name="identifier"
+              id="phone"
+              name="phone"
               type="text"
+              autoComplete="username"
               required
-              value={form.identifier}
+              value={form.phone}
               onChange={handleChange}
-              placeholder="Phone number, username, or email"
+              placeholder="Phone number"
               className="w-full bg-[#262626] border border-[#363636] rounded-xl px-4 py-3 text-sm text-white outline-none focus:border-[#a8a8a8] placeholder:text-[#8e8e8e] transition"
             />
           </div>
